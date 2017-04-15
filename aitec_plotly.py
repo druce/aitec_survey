@@ -11,7 +11,7 @@ from IPython.display import HTML
 # TODO: show %
 
 chart_width=720
-chart_height=540
+chart_height=580
 
 aitec_colors = ['rgb(51,160,44)',
                 'rgb(227,26,28)',
@@ -233,8 +233,8 @@ def aitec_boxplot(chartframe, title, x_label, y_label, col_order=None):
         
 def aitec_bar_layout(title, x_label, y_label, **kwargs):
 
-    kwargs.setdefault('x_label_size', 14)
-    kwargs.setdefault('bottom_margin', 80)
+    kwargs.setdefault('x_label_size', 12)
+    kwargs.setdefault('bottom_margin', 100)
     #print kwargs['x_label_size']
     layout = Layout(
         title="%s" % title,
