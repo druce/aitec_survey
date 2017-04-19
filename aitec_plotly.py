@@ -126,6 +126,11 @@ def aitec_barstack(tracedict, title, x_label, y_label, col_order=None):
                     aitec_colors[3], 
                     aitec_colors[2],
                     aitec_colors[8], 
+                    aitec_colors[0], 
+                    aitec_colors[4], 
+                    aitec_colors[5], 
+                    aitec_colors[6], 
+                    aitec_colors[7], 
                    ]
     group_colors.reverse()
     
