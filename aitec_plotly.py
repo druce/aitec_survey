@@ -88,7 +88,7 @@ def aitec_bar_multi(chartdata,
         # add no answer column where all in row are null
         allnulls = chartframe.isnull().all(axis=1)
         replace_list = ["No Answer" if an else None for an in allnulls]
-        chartframe.assign(No_Answer=pd.Series(replace_list))
+        chartframe = chartframe.assign(No_Answer=pd.Series(replace_list, index = chartframe.index))        
         colnames = chartframe.columns
         
     # melt multiple columns into 1, i.e. gather/unflatten
