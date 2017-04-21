@@ -201,14 +201,15 @@ def scatter_chart_jitter(chartframe, chart_title, x_label, y_label, spread):
 
     return dict(data=data, layout=layout)
 
-def aitec_histogram(val_list, chart_title, x_label, y_label):
+def aitec_histogram(val_list, chart_title, x_label, y_label, nbinsx=12, **kwargs):
 
-    layout = aitec_bar_layout(chart_title, x_label, y_label)
+    layout = aitec_bar_layout(chart_title, x_label, y_label, **kwargs)
 
     data = [Histogram(
         x = val_list,
         marker=dict(color=aitec_colors),
         opacity=0.9,
+        nbinsx=nbinsx,
         )
     ]
     

@@ -11850,18 +11850,31 @@ a.anchor-link {
 
 <div class="reveal">
 <div class="slides">
-
+<style type="text/css">
+.input_prompt, .input_area, .output_prompt {
+    display:none !important;
+}
+</style>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="img/ys1header.png" alt="aitec logo" title="AITEC"></p>
 <h1 id="Member-survey">Member survey<a class="anchor-link" href="#Member-survey">&#182;</a></h1><ul>
-<li>Slideshow (takes a minute to load - 200 slides is a lot!) <a href="http://www.streeteye.com/static/aitec_survey/AITEC%20Slideshow.slides.html">http://www.streeteye.com/static/aitec_survey/AITEC%20Slideshow.slides.html</a></li>
-<li>PDF <a href="http://www.streeteye.com/static/aitec_survey/AITEC%20Slideshow%20slides.pdf">http://www.streeteye.com/static/aitec_survey/AITEC%20Slideshow%20slides.pdf</a></li>
-<li>data file <a href="http://www.streeteye.com/static/aitec_survey/buyside.csv">http://www.streeteye.com/static/aitec_survey/buyside.csv</a></li>
-<li>Jupyter notebook with python code to generate presentation <a href="https://github.com/druce/aitec_survey">https://github.com/druce/aitec_survey</a></li>
+<li><a href="http://www.streeteye.com/static/aitec_survey/AITEC%20Slideshow.slides.html">Slideshow</a><ul>
+<li>Takes a minute to load - 200 slides is a lot!</li>
+<li>Navigate with spacebar, arrow keys, click on arrows </li>
+<li>Mobile not recommended (swipe left/right actually works, but very slow)   </li>
+<li>Mouseover plots for more info (it's a little glitchy, try shrinking/expanding the browser if it shows data for bars off to the right/left)</li>
+<li>Boxplots show distributions, median, interquartile range, outliers - <a href="https://help.plot.ly/what-is-a-box-plot/">more info</a></li>
 </ul>
+</li>
+<li><a href="http://www.streeteye.com/static/aitec_survey/AITEC%20Slideshow%20slides.pdf">PDF</a></li>
+<li><a href="http://www.streeteye.com/static/aitec_survey/buyside.csv">Data file</a></li>
+<li><a href="https://github.com/druce/aitec_survey">Python code in Jupyter notebook to generate presentation</a></li>
+</ul>
+<p>&mdash; your AITEC survey team - <a href="mailto:surveys@aitec.org">surveys@aitec.org</a></p>
 
 </div>
 </div>
@@ -11888,7 +11901,7 @@ require(
     {
       // it makes sense to wait a little bit when you are loading
       // reveal from a cdn in a slow connection environment
-      waitSeconds: 1
+      waitSeconds: 15
     },
     [
       "/lib/js/head.min.js",
