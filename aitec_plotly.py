@@ -42,6 +42,17 @@ aitec_color_dict = {'div': {},
                     'qual': {'AITEC': aitec_colors,},
                     'seq': {}}
 
+stack_colors = [aitec_colors[1], 
+                aitec_colors[3], 
+                aitec_colors[2],
+                aitec_colors[8], 
+                aitec_colors[0], 
+                aitec_colors[4], 
+                aitec_colors[5], 
+                aitec_colors[6], 
+                aitec_colors[7], 
+]
+
 #HTML(cl.to_html( cl.scales['12'] )) # All scales with 12 colors
 #HTML(cl.to_html( aitec_color_dict )) # AITEC colors grabbed from above
 
@@ -118,68 +129,56 @@ def aitec_bar_multi(chartdata,
     
     return dict(data=data, layout=layout)
 
-def aitec_barstack(tracedict, title, x_label, y_label, col_order=None):
-    """takes a dict 'name' : dataframe pairs, plot count column (could prob use cleanup)"""
-    layout = aitec_barstack_layout(title, x_label, y_label)
+def aitec_barstack(chartframe, title, x_label, y_label, **kwargs):
+    """takes chartframe, index is x axis (ordered), other cols are stacked (in col order)"""
+    layout = aitec_barstack_layout(title, x_label, y_label, **kwargs)
 
-    group_colors = [aitec_colors[1], 
-                    aitec_colors[3], 
-                    aitec_colors[2],
-                    aitec_colors[8], 
-                    aitec_colors[0], 
-                    aitec_colors[4], 
-                    aitec_colors[5], 
-                    aitec_colors[6], 
-                    aitec_colors[7], 
-                   ]
-    group_colors.reverse()
-    
+    mycolors = list(stack_colors)
+    mycolors.reverse()
+
+    ynames = chartframe.columns
     data=[]
+    for yindex in ynames:
+        tracedf = pd.DataFrame(chartframe[yindex])
+        tracedf.columns = ['count']
 
-    keylist = tracedict.keys()
-    for key in keylist:
-        trace = tracedict[key]
-        trace1 = Bar(
-            x=trace.index.values.tolist(),
-            y=trace['count'].tolist(),
-            name=key,
+        trace = Bar(
+            x=tracedf.index.values.tolist(),
+            y=tracedf['count'].tolist(),
+            name=yindex,
             marker={
-                'color' : group_colors.pop(),
+                'color' : mycolors.pop(),
             },
             opacity=0.9,
         )
-        data.append(trace1)
+        data.append(trace)
         
     return dict(data=data, layout=layout)
 
-def aitec_bargroup(tracedict, title, x_label, y_label, col_order=None):
-    """takes a dict 'name' : dataframe pairs"""
-    layout = aitec_bargroup_layout(title, x_label, y_label)
+def aitec_bargroup(chartframe, title, x_label, y_label, **kwargs):
+    """takes chartframe, index is x axis (ordered), other cols are grouped (in col order)"""
+    layout = aitec_bargroup_layout(title, x_label, y_label, **kwargs)
 
+    ynames = chartframe.columns
     data=[]
-    color_index = 0
-    
-    if col_order:
-        keys = col_order
-    else:
-        keys = sorted(list(tracedict.keys()))        
-        
-    for key in keys:
-        traceframe = tracedict[key]
-        trace1 = Bar(
-            x=traceframe.index.values.tolist(),
-            y=traceframe.tolist(),
-            name=key,
+    color_index = 0    
+    for yindex in ynames:
+        tracedf = pd.DataFrame(chartframe[yindex])
+        tracedf.columns = ['count']
+
+        trace = Bar(
+            x=tracedf.index.values.tolist(),
+            y=tracedf['count'].tolist(),
+            name=yindex,
             marker={
                 'color' : aitec_colors[color_index],
             },
             opacity=0.9,
         )
-        data.append(trace1)
+        data.append(trace)
         color_index += 1
         
     return dict(data=data, layout=layout)
-
 
 def scatter_chart_jitter(chartframe, chart_title, x_label, y_label, spread):
     
@@ -278,15 +277,15 @@ def aitec_bar_layout(title, x_label, y_label, **kwargs):
     return layout
 
 # adds barmode="stack", legend
-def aitec_barstack_layout(title, x_label, y_label):
-    layout = aitec_bar_layout(title, x_label, y_label)
+def aitec_barstack_layout(title, x_label, y_label, **kwargs):
+    layout = aitec_bar_layout(title, x_label, y_label, **kwargs)
     layout["barmode"] ='stack'
     layout["showlegend"] = True
     return layout
 
 # adds barmode="group", legend
-def aitec_bargroup_layout(title, x_label, y_label):
-    layout = aitec_bar_layout(title, x_label, y_label)
+def aitec_bargroup_layout(title, x_label, y_label, **kwargs):
+    layout = aitec_bar_layout(title, x_label, y_label, **kwargs)
     layout["barmode"] ='group'
     layout["showlegend"] = True
     return layout
