@@ -1,0 +1,21 @@
+jupyter kernel restart and run all
+save
+jupyter nbconvert --to slides --template mytemplate.tpl --reveal-prefix reveal.js "AITEC Slideshow.ipynb"
+jupyter nbconvert --to html --template mytemplate.tpl "AITEC Slideshow.ipynb"
+jupyter nbconvert --to html --template mytemplate.tpl --reveal-prefix reveal.js "index.ipynb"
+
+open Slideshow.html 
+wait for it to load 100% - show 200+ pages
+save html as pdf
+
+fix up html files index.html and slides.html
+fix font-awesome link <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+fix WaitSeconds=2
+fix reveal.js prefix where it didn't work for some reason (only .slides and index.html) (this breaks print, so print first)
+open file and check no load errors in console
+
+jupyter kernel restart and clear (so no data in github)
+save
+git commit -a -m ""
+git push origin master
+
